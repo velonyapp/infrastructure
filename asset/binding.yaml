@@ -1,3 +1,4 @@
+# Main
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -10,7 +11,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -23,7 +23,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -36,7 +35,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -49,7 +47,7 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
+# DLQ
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -62,7 +60,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -75,7 +72,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -88,7 +84,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:

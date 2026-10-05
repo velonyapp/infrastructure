@@ -1,0 +1,71 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Policy
+metadata:
+  name: asset.image.create.dlx
+spec:
+  name: asset.image.create.dlx
+  pattern: "^asset\\.image\\.create$"
+  applyTo: quorum_queues
+  definition:
+    dead-letter-exchange: asset.dlx
+    dead-letter-routing-key: asset.image.create.dlq
+    delivery-limit: 5
+    delayed-retry-type: failed
+    delayed-retry-min: 1000
+    delayed-retry-max: 30000
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Policy
+metadata:
+  name: asset.image.reconcile.dlx
+spec:
+  name: asset.image.reconcile.dlx
+  pattern: "^asset\\.image\\.reconcile$"
+  applyTo: quorum_queues
+  definition:
+    dead-letter-exchange: asset.dlx
+    dead-letter-routing-key: asset.image.reconcile.dlq
+    delivery-limit: 5
+    delayed-retry-type: failed
+    delayed-retry-min: 1000
+    delayed-retry-max: 30000
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Policy
+metadata:
+  name: asset.image.process.dlx
+spec:
+  name: asset.image.process.dlx
+  pattern: "^asset\\.image\\.process$"
+  applyTo: quorum_queues
+  definition:
+    dead-letter-exchange: asset.dlx
+    dead-letter-routing-key: asset.image.process.dlq
+    delivery-limit: 5
+    delayed-retry-type: failed
+    delayed-retry-min: 1000
+    delayed-retry-max: 30000
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Policy
+metadata:
+  name: asset.image.delete.dlx
+spec:
+  name: asset.image.delete.dlx
+  pattern: "^asset\\.image\\.delete$"
+  applyTo: quorum_queues
+  definition:
+    dead-letter-exchange: asset.dlx
+    dead-letter-routing-key: asset.image.delete.dlq
+    delivery-limit: 5
+    delayed-retry-type: failed
+    delayed-retry-min: 1000
+    delayed-retry-max: 30000
+  rabbitmqClusterReference:
+    name: rabbitmq

@@ -1,3 +1,4 @@
+# Main
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
 metadata:
@@ -10,21 +11,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
-apiVersion: rabbitmq.com/v1beta1
-kind: Queue
-metadata:
-  name: asset.image.create.dlq
-spec:
-  name: asset.image.create.dlq
-  type: quorum
-  durable: true
-  autoDelete: false
-  rabbitmqClusterReference:
-    name: rabbitmq
-
----
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
 metadata:
@@ -37,7 +23,57 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: asset.image.process
+spec:
+  name: asset.image.process
+  type: quorum
+  durable: true
+  autoDelete: false
+  rabbitmqClusterReference:
+    name: rabbitmq
 
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: asset.image.delete
+spec:
+  name: asset.image.delete
+  type: quorum
+  durable: true
+  autoDelete: false
+  rabbitmqClusterReference:
+    name: rabbitmq
+
+---
+# DLQ
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: asset.image.delete.dlq
+spec:
+  name: asset.image.delete.dlq
+  type: quorum
+  durable: true
+  autoDelete: false
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: asset.image.create.dlq
+spec:
+  name: asset.image.create.dlq
+  type: quorum
+  durable: true
+  autoDelete: false
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
 metadata:
@@ -50,52 +86,12 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
-apiVersion: rabbitmq.com/v1beta1
-kind: Queue
-metadata:
-  name: asset.image.process
-spec:
-  name: asset.image.process
-  type: quorum
-  durable: true
-  autoDelete: false
-  rabbitmqClusterReference:
-    name: rabbitmq
----
-
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
 metadata:
   name: asset.image.process.dlq
 spec:
   name: asset.image.process.dlq
-  type: quorum
-  durable: true
-  autoDelete: false
-  rabbitmqClusterReference:
-    name: rabbitmq
----
-
-apiVersion: rabbitmq.com/v1beta1
-kind: Queue
-metadata:
-  name: asset.image.delete
-spec:
-  name: asset.image.delete
-  type: quorum
-  durable: true
-  autoDelete: false
-  rabbitmqClusterReference:
-    name: rabbitmq
----
-
-apiVersion: rabbitmq.com/v1beta1
-kind: Queue
-metadata:
-  name: asset.image.delete.dlq
-spec:
-  name: asset.image.delete.dlq
   type: quorum
   durable: true
   autoDelete: false

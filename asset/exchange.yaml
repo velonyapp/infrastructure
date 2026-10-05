@@ -1,3 +1,4 @@
+# Main
 apiVersion: rabbitmq.com/v1beta1
 kind: Exchange
 metadata:
@@ -10,7 +11,7 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq
 ---
-
+# DLQ
 apiVersion: rabbitmq.com/v1beta1
 kind: Exchange
 metadata:
