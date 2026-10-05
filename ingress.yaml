@@ -25,7 +25,7 @@ spec:
                 name: identity
                 port:
                   number: 80
-          - path: /v1/images:upload
+          - path: /v1/images
             pathType: Prefix
             backend:
               service:
