@@ -1,0 +1,45 @@
+transport:
+  http:
+    address: "0.0.0.0:8010"
+    timeout: 10s
+
+  grpc:
+    address: "0.0.0.0:9010"
+    timeout: 10s
+
+  rabbitmq:
+    address: "amqp://rabbitmq:5672"
+    username: "${RABBITMQ_USERNAME}"
+    password: "${RABBITMQ_PASSWORD}"
+    queues:
+      create_image: asset.image.create
+      process_image: asset.image.process
+      reconcile_image: asset.image.reconcile
+      delete_image: asset.image.delete
+
+data:
+  mysql:
+    dsn: "${MYSQL_DSN}"
+    max_open_connections: 50
+    max_idle_connections: 10
+    max_connection_lifetime: 1800s
+
+  s3:
+    endpoint: "https://ddaef179b5a75829b076a7bac232eab4.r2.cloudflarestorage.com"
+    access_key_id: "${S3_ACCESS_KEY_ID}"
+    secret_access_key: "${S3_SECRET_ACCESS_KEY}"
+    bucket: velony
+
+telemetry:
+  tracing:
+    protocol: PROTOCOL_HTTP_PROTOBUF
+    endpoint: https://otlp-gateway-prod-ap-southeast-2.grafana.net/otlp/v1/traces
+    authorization: "${OBSERVABILITY_AUTHORIZATION}"
+    sample_ratio: 0.1
+
+  metrics:
+    protocol: PROTOCOL_HTTP_PROTOBUF
+    endpoint: https://otlp-gateway-prod-ap-southeast-2.grafana.net/otlp/v1/metrics
+    authorization: "${OBSERVABILITY_AUTHORIZATION}"
+    export_interval: 5s
+

@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: asset
+  labels:
+    app.kubernetes.io/name: asset
+    app.kubernetes.io/part-of: velony
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: asset
+
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: asset
+        app.kubernetes.io/part-of: velony
+
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull
+
+      containers:
+        - name: identity
+          image: ghcr.io/velonyapp/asset:sha-b6b331b
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - name: http
+              containerPort: 8010
+              protocol: TCP
+
+            - name: grpc
+              containerPort: 9010
+              protocol: TCP
+
+          livenessProbe:
+            grpc:
+              port: 9010
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 2
+
+          readinessProbe:
+            grpc:
+              port: 9010
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 2
+
+          envFrom:
+            - secretRef:
+                name: asset-secret
+              prefix: VELONY_ASSET_
+
+          env:
+            - name: VELONY_ASSET_RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: username
+
+            - name: VELONY_ASSET_RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: password
+
+          volumeMounts:
+            - name: config
+              mountPath: /data/config
+              readOnly: true
+
+      volumes:
+        - name: config
+          configMap:
+            name: asset-config

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valkey
+
+spec:
+  replicas: 1
+
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app: valkey
+
+  template:
+    metadata:
+      labels:
+        app: valkey
+
+    spec:
+      containers:
+        - name: valkey
+          image: valkey/valkey:9.1.2
+
+          env:
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: valkey-secret
+                  key: VALKEY_PASSWORD
+
+          args:
+            - --requirepass
+            - "$(VALKEY_PASSWORD)"
+            - --maxmemory
+            - 768mb
+            - --maxmemory-policy
+            - allkeys-lfu
+
+          readinessProbe:
+            tcpSocket:
+              port: 6379
+            periodSeconds: 5
+
+          resources:
+            limits:
+              memory: 2Gi
+
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: valkey

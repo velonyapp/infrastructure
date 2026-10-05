@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - connector.yaml
+  - topic.yaml
+  - exchange.yaml
+  - queue.yaml
+  - binding.yaml
+
+configMapGenerator:
+  - name: asset-config
+    files:
+      - config.yaml
+
+secretGenerator:
+  - name: asset-secret
+    envs:
+      - secret.env
+    options:
+      disableNameSuffixHash: true

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: email
+  labels:
+    app.kubernetes.io/name: email
+    app.kubernetes.io/part-of: velony
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app.kubernetes.io/name: email
+
+  ports:
+    - name: grpc
+      port: 50051
+      protocol: TCP
+      targetPort: grpc

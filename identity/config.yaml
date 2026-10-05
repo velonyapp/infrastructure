@@ -1,0 +1,49 @@
+transport:
+  http:
+    address: "0.0.0.0:8000"
+    timeout: 10s
+
+  grpc:
+    address: "0.0.0.0:9000"
+    timeout: 10s
+
+data:
+  mysql:
+    dsn: "${MYSQL_DSN}"
+    max_open_connections: 50
+    max_idle_connections: 10
+    max_connection_lifetime: 1800s
+
+  redis:
+    dsn: "${REDIS_DSN}"
+    max_active_connections: 50
+
+security:
+  access_token:
+    secret: "${ACCESS_TOKEN_SECRET}"
+    ttl: 900s
+
+  refresh_token:
+    ttl: 2592000s
+
+  email_change_request_token:
+    secret: "${EMAIL_CHANGE_REQUEST_TOKEN_SECRET}"
+    ttl: 900s
+
+observability:
+  tracing:
+    protocol: PROTOCOL_HTTP_PROTOBUF
+    endpoint: https://otlp-gateway-prod-ap-southeast-2.grafana.net/otlp/v1/traces
+    authorization: "${OBSERVABILITY_AUTHORIZATION}"
+    sample_ratio: 0.1
+
+  metrics:
+    protocol: PROTOCOL_HTTP_PROTOBUF
+    endpoint: https://otlp-gateway-prod-ap-southeast-2.grafana.net/otlp/v1/metrics
+    authorization: "${OBSERVABILITY_AUTHORIZATION}"
+    export_interval: 5s
+
+gateway:
+  asset:
+    endpoint: "dns:///asset:50051"
+    timeout: 5s

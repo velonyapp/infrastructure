@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - connector.yaml
+  - topics.yaml
+
+configMapGenerator:
+  - name: identity-config
+    files:
+      - config.yaml
+
+secretGenerator:
+  - name: identity-secret
+    envs:
+      - secret.env
+    options:
+      disableNameSuffixHash: true

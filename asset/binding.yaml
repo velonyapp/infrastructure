@@ -1,0 +1,102 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.create
+spec:
+  source: asset
+  destination: asset.image.create
+  destinationType: queue
+  routingKey: asset.image.create
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.reconcile
+spec:
+  source: asset
+  destination: asset.image.reconcile
+  destinationType: queue
+  routingKey: asset.image.reconcile
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.process
+spec:
+  source: asset
+  destination: asset.image.process
+  destinationType: queue
+  routingKey: asset.image.process
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.delete
+spec:
+  source: asset
+  destination: asset.image.delete
+  destinationType: queue
+  routingKey: asset.image.delete
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.create.dlq
+spec:
+  source: asset.dlx
+  destination: asset.image.create.dlq
+  destinationType: queue
+  routingKey: asset.image.create.dlq
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.reconcile.dlq
+spec:
+  source: asset.dlx
+  destination: asset.image.reconcile.dlq
+  destinationType: queue
+  routingKey: asset.image.reconcile.dlq
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.process.dlq
+spec:
+  source: asset.dlx
+  destination: asset.image.process.dlq
+  destinationType: queue
+  routingKey: asset.image.process.dlq
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: asset.image.delete.dlq
+spec:
+  source: asset.dlx
+  destination: asset.image.delete.dlq
+  destinationType: queue
+  routingKey: asset.image.delete.dlq
+  rabbitmqClusterReference:
+    name: rabbitmq

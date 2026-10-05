@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: public-api
+  namespace: velony
+
+spec:
+  ingressClassName: traefik
+
+  rules:
+    - http:
+        paths:
+          - path: /v1/users
+            pathType: Prefix
+            backend:
+              service:
+                name: identity
+                port:
+                  number: 80
+          - path: /v1/auth
+            pathType: Prefix
+            backend:
+              service:
+                name: identity
+                port:
+                  number: 80
+          - path: /v1/images:upload
+            pathType: Prefix
+            backend:
+              service:
+                name: asset
+                port:
+                  number: 80
