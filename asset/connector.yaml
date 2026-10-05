@@ -40,6 +40,7 @@ spec:
     transforms.outbox.route.topic.replacement: asset.${routedByValue}
     transforms.outbox.table.field.event.key: aggregate_id
     transforms.outbox.table.field.event.payload: payload
+    transforms.outbox.table.field.event.timestamp: occur_time
     transforms.outbox.table.expand.json.payload: true
     transforms.outbox.table.fields.additional.placement: type:header:type,tags:header:tags
 
