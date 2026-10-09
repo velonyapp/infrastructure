@@ -32,3 +32,17 @@ spec:
                 name: asset
                 port:
                   number: 80
+          - path: /v1/emailTemplates
+            pathType: Prefix
+            backend:
+              service:
+                name: email
+                port:
+                  number: 80
+          - path: /v1:sendEmail
+            pathType: Exact
+            backend:
+              service:
+                name: email
+                port:
+                  number: 80
