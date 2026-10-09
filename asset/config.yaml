@@ -13,8 +13,8 @@ transport:
     password: "${RABBITMQ_PASSWORD}"
     queues:
       create_image: asset.image.create
+      confirm_image_upload: asset.image.confirm-upload
       process_image: asset.image.process
-      reconcile_image: asset.image.reconcile
       delete_image: asset.image.delete
 
 data:

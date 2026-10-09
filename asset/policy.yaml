@@ -19,14 +19,14 @@ spec:
 apiVersion: rabbitmq.com/v1beta1
 kind: Policy
 metadata:
-  name: asset.image.reconcile.dlx
+  name: asset.image.confirm-upload.dlx
 spec:
-  name: asset.image.reconcile.dlx
-  pattern: "^asset\\.image\\.reconcile$"
+  name: asset.image.confirm-upload.dlx
+  pattern: "^asset\\.image\\.confirm-upload$"
   applyTo: quorum_queues
   definition:
     dead-letter-exchange: asset.dlx
-    dead-letter-routing-key: asset.image.reconcile.dlq
+    dead-letter-routing-key: asset.image.confirm-upload.dlq
     delivery-limit: 5
     delayed-retry-type: failed
     delayed-retry-min: 1000

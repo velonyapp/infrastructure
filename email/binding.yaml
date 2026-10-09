@@ -1,0 +1,25 @@
+# Main
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: email.send-email
+spec:
+  source: email
+  destination: email.send-email
+  destinationType: queue
+  routingKey: email.send-email
+  rabbitmqClusterReference:
+    name: rabbitmq
+---
+# DLQ
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: email.send-email.dlq
+spec:
+  source: email.dlx
+  destination: email.send-email.dlq
+  destinationType: queue
+  routingKey: email.send-email.dlq
+  rabbitmqClusterReference:
+    name: rabbitmq

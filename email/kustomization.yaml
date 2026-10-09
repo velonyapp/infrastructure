@@ -4,6 +4,10 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+  - exchange.yaml
+  - queue.yaml
+  - binding.yaml
+  - policy.yaml
 
 configMapGenerator:
   - name: email-config

@@ -1,11 +1,11 @@
 # Main
 apiVersion: rabbitmq.com/v1beta1
-kind: Exchange
+kind: Queue
 metadata:
-  name: email
+  name: email.send-email
 spec:
-  name: email
-  type: direct
+  name: email.send-email
+  type: quorum
   durable: true
   autoDelete: false
   rabbitmqClusterReference:
@@ -13,12 +13,12 @@ spec:
 ---
 # DLQ
 apiVersion: rabbitmq.com/v1beta1
-kind: Exchange
+kind: Queue
 metadata:
-  name: email.dlx
+  name: email.send-email.dlq
 spec:
-  name: email.dlx
-  type: direct
+  name: email.send-email.dlq
+  type: quorum
   durable: true
   autoDelete: false
   rabbitmqClusterReference:

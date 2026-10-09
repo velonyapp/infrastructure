@@ -1,3 +1,7 @@
+email:
+  resend:
+    api_key: "${RESEND_API_KEY}"
+
 transport:
   http:
     address: "0.0.0.0:8011"
@@ -11,6 +15,15 @@ transport:
     address: "amqp://rabbitmq:5672"
     username: "${RABBITMQ_USERNAME}"
     password: "${RABBITMQ_PASSWORD}"
+    queues:
+      send_email: email.send-email
+
+data:
+  mysql:
+    dsn: "${MYSQL_DSN}"
+    max_open_connections: 50
+    max_idle_connections: 10
+    max_connection_lifetime: 1800s
 
 observability:
   tracing:
@@ -24,7 +37,3 @@ observability:
     endpoint: https://otlp-gateway-prod-ap-southeast-2.grafana.net/otlp/v1/metrics
     authorization: "${OBSERVABILITY_AUTHORIZATION}"
     export_interval: 5s
-
-email:
-  resend:
-    api_key: "${RESEND_API_KEY}"

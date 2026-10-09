@@ -14,9 +14,9 @@ spec:
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
 metadata:
-  name: asset.image.reconcile
+  name: asset.image.confirm-upload
 spec:
-  name: asset.image.reconcile
+  name: asset.image.confirm-upload
   type: quorum
   durable: true
   autoDelete: false
@@ -77,9 +77,9 @@ spec:
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
 metadata:
-  name: asset.image.reconcile.dlq
+  name: asset.image.confirm-upload.dlq
 spec:
-  name: asset.image.reconcile.dlq
+  name: asset.image.confirm-upload.dlq
   type: quorum
   durable: true
   autoDelete: false

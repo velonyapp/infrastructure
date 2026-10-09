@@ -1,0 +1,17 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Policy
+metadata:
+  name: email.send-email.dlx
+spec:
+  name: email.send-email.dlx
+  pattern: "^email\\.send-email$"
+  applyTo: quorum_queues
+  definition:
+    dead-letter-exchange: email.dlx
+    dead-letter-routing-key: email.send-email.dlq
+    delivery-limit: 5
+    delayed-retry-type: failed
+    delayed-retry-min: 1000
+    delayed-retry-max: 30000
+  rabbitmqClusterReference:
+    name: rabbitmq
